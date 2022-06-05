@@ -1,5 +1,4 @@
 /** @format */
-
 import { useEffect, useState } from "react";
 import { HeartIcon } from "@heroicons/react/outline";
 import { useFormik } from "formik";
@@ -12,15 +11,15 @@ function TweetForm({ loggedInUser, onSuccess }) {
   const formik = useFormik({
     onSubmit: async (values, form) => {
       await axios({
-        method: 'post',
-        url: "http://localhost:9901/tweets",
+        method: "post",
+        url: `${import.meta.env.VITE_API_HOST}/tweets`,
         headers: {
           authorization: `Bearer ${loggedInUser.accessToken}`,
         },
         data: {
           text: values.text,
         },
-      })
+      });
 
       form.setFieldValue("text", "");
       onSuccess()
@@ -31,7 +30,7 @@ function TweetForm({ loggedInUser, onSuccess }) {
   })
 
   function changeText(e) {
-    setText(e.target.value);
+    setText(e.target.value)
   }
 
   return (
@@ -80,7 +79,7 @@ function TweetForm({ loggedInUser, onSuccess }) {
         </div>
       </form>
     </div>
-  );
+  )
 }
 
 function Tweet({ name, username, children }) {
@@ -112,15 +111,16 @@ function Tweet({ name, username, children }) {
 }
 
 export function Home({ loggedInUser }) {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([])
+
 
   async function getData() {
-    const res = await axios.get("http://localhost:9901/tweets", {
+    const res = await axios.get(`${import.meta.env.VITE_API_HOST}/tweets`, {
       headers: {
         authorization: `Bearer ${loggedInUser.accessToken}`,
-      }
-    })
-    setData(res.data);
+      },
+    });
+    setData(res.data)
   }
 
   useEffect(() => {
@@ -143,5 +143,5 @@ export function Home({ loggedInUser }) {
           ))}
       </div>
     </>
-  );
+  )
 }
