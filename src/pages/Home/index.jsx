@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { HeartIcon } from '@heroicons/react/outline'
+import axios from 'axios'
+import { useEffect } from 'react'
 
 const MAX_TWEET_CHAR = 250
 
 // Função formulário do tweet com uso do state(estado)
-export function TweetForm() {
+ function TweetForm() {
   const [text, setText] = useState('')
 
   function changeText(e) {
@@ -52,7 +54,8 @@ export function TweetForm() {
   )
 }
 
-export function Tweet({name, username, children}) {
+ function Tweet({name, username, children}) {
+
   return (
     <div className="flex space-x-3 p-4 border-b border-silver">
        <div>
@@ -69,7 +72,7 @@ export function Tweet({name, username, children}) {
       
       <div className='space-y-1'>
         <span className="font-bold text-sm">{name}</span> {' '}
-        <span className="font-bold text-sm">@{username}</span>
+        <span className="text-sm text-silver">@{username}</span>
 
         <p>{children}</p>
         <div className='flex space-x-1 text-silver text-sm items-center'>
@@ -82,17 +85,31 @@ export function Tweet({name, username, children}) {
 }
 
 export function Home() {
+  const token = ""
+   const [data, setData] = useState([])
+  
+   async function getData() {
+    const res = await axios.get('http://localhost:9901/tweets', {
+      headers: {
+        'authorization': `Bearer ${token}`
+      }
+    })
+    setData(res.data)
+   }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
   return (
     <>
        <TweetForm />
       <div>
-        <Tweet name="Elon Musk" username="elonmusk">
-          Let’s make Twitter maximun fun!
-        </Tweet>
-    
-        <Tweet name="Lucas Felipe" username="lucasfelipe">
-          Let’s make Twitter maximun aw!
-        </Tweet>
+        {data.length && data.map(tweet => (
+          <Tweet name={tweet.user.name} username={tweet.user.username}>
+            {tweet.text}
+          </Tweet>          
+        ))}
       </div>
     </>
   )  

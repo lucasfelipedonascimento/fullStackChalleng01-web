@@ -5,7 +5,7 @@ import * as axios from 'axios'
 
 // Página de Login
 
-export function LogoPage() {
+function LogoPage() {
     return (         
         <div className='bg-birdBlue w-1/2 h-screen flex items-center'>     
              <svg className="m-auto" width="359" height="290" viewBox="0 0 359 290" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,7 +32,7 @@ const validationSchema = yup.object({
     password: yup.string().required("Digite sua senha:")
 })
 
-export function FormPage({ signInUser }) {
+function FormPage({ signInUser }) {
     const formik = useFormik({
         onSubmit: async values =>  { 
             const res = await axios.get('http://localhost:9901/login', {
