@@ -9,12 +9,14 @@ import * as axios from "axios";
 function LogoPage() {
   return (
     <div
-      className="sm:bg-birdBlue sm:flex sm:flex-col sm:items-center sm:justify-center
-                    lg:bg-birdBlue lg:w-1/2 lg:h-screen lg:flex lg:items-center lg:justify-center"
+      className="bg-birdBlue items-center
+                  sm:flex sm:flex-col sm:items-center sm:justify-center
+                  lg:w-1/2 lg:h-screen"
     >
       <svg
-        className="sm:w-15 sm:h-20 sm:m-5
-                     lg:h-full"
+        className="w-14 h-20 m-auto
+                   sm:w-full sm:h-20 sm:m-5
+                   lg:w-1/2 lg:h-full"
         width="359"
         height="290"
         viewBox="0 0 359 290"
@@ -78,8 +80,9 @@ export function SignupPage({ signInUser }) {
                  lg:flex lg:space-y-6 lg:items-center lg:m-auto lg:flex-col"
     >
       <form
-        className="sm:flex sm:flex-col sm:items-center sm:mt-20 sm:space-y-5 
-                     lg:m-2 lg:flex lg:flex-col lg:space-y-5 lg:items-center"
+        className="flex flex-col space-y-5 items-center mt-20
+                   sm:flex sm:flex-col sm:items-center sm:mt-20 sm:space-y-5 
+                   lg:m-2 lg:flex lg:flex-col lg:space-y-5 lg:items-center"
         onSubmit={formik.handleSubmit}
       >
         <span className="text-platinum text-4xl font-bold">Crie sua conta</span>
@@ -158,20 +161,21 @@ export function SignupPage({ signInUser }) {
 
         <button
           type="submit"
-          className="bg-birdBlue text-platinum px-5 py-2 disabled:opacity-50 rounded-full w-full text-xl font-bold"
+          className="bg-birdBlue text-platinum px-5 py-2 disabled:opacity-50 rounded-full font-bold text-xl w-max
+                      sm:w-full"
           disabled={formik.isSubmitting || !formik.isValid}
         >
           {formik.isSubmitting ? "Cadastrando..." : "Cadastrar"}
         </button>
-      </form>
 
-      <span className="text-silver flex items-center mt-2">
-        {" "}
-        Já tem uma conta?
-        <a className="text-birdBlue text-sm p-1" href="/login">
-          Faça Login
-        </a>
-      </span>
+        <span className="text-silver flex items-center mt-2">
+          {" "}
+          Já tem uma conta?
+          <a className="text-birdBlue text-sm p-1" href="/login">
+            Faça Login
+          </a>
+        </span>
+      </form>
     </div>
   );
 }
