@@ -22,15 +22,15 @@ function TweetForm({ loggedInUser, onSuccess }) {
       });
 
       form.setFieldValue("text", "");
-      onSuccess()
+      onSuccess();
     },
     initialValues: {
       text: "",
     },
-  })
+  });
 
   function changeText(e) {
-    setText(e.target.value)
+    setText(e.target.value);
   }
 
   return (
@@ -79,7 +79,7 @@ function TweetForm({ loggedInUser, onSuccess }) {
         </div>
       </form>
     </div>
-  )
+  );
 }
 
 function Tweet({ name, username, children }) {
@@ -111,8 +111,7 @@ function Tweet({ name, username, children }) {
 }
 
 export function Home({ loggedInUser }) {
-  const [data, setData] = useState([])
-
+  const [data, setData] = useState([]);
 
   async function getData() {
     const res = await axios.get(`${import.meta.env.VITE_API_HOST}/tweets`, {
@@ -120,12 +119,12 @@ export function Home({ loggedInUser }) {
         authorization: `Bearer ${loggedInUser.accessToken}`,
       },
     });
-    setData(res.data)
+    setData(res.data);
   }
 
   useEffect(() => {
-    getData()
-  }, [])
+    getData();
+  }, []);
 
   return (
     <>
@@ -143,5 +142,5 @@ export function Home({ loggedInUser }) {
           ))}
       </div>
     </>
-  )
+  );
 }
