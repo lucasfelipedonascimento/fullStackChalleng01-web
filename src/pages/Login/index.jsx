@@ -127,7 +127,7 @@ function FormPage({ signInUser }) {
                       sm:w-full"
           disabled={formik.isSubmitting || !formik.isValid}
         >
-          {formik.isSubmitting ? "Enviando..." : "Entrar"}
+          {formik.isSubmitting ? "Entrando..." : "Entrar"}
         </button>
 
         <span
