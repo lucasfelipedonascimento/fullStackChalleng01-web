@@ -1,19 +1,21 @@
-import { useState } from 'react'
+/** @format */
 
-import { Home } from './pages/Home'
-import { Login } from './pages/Login'
-import { Signup } from './pages/Signup'
+import { useState } from "react";
+import { Home } from "./pages/Home";
+import { Login } from "./pages/Login";
+import { Signup } from "./pages/Signup";
 
 export function App() {
-    const [user, setUser] = useState()
+  const [user, setUser] = useState()
 
-    if (user) {
-        return <Home loggedInUser={user}/>
-    }
+  if (user) {
+    return <Home loggedInUser={user} />
+  }
 
-    return window.location.pathname === '/signup'
-        ? <Signup signInUser={setUser} />
-        : <Login signInUser={setUser} />
- 
+  return window.location.pathname === "/signup" ? (
+    <Signup signInUser={setUser} />
+  ) : (
+    <Login signInUser={setUser} />
+  )
+
 }
-

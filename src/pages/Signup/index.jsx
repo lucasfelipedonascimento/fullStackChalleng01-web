@@ -6,11 +6,15 @@ import * as axios from "axios";
 
 // Página de Cadastro
 
-export function LogoPage() {
+function LogoPage() {
   return (
-    <div className="bg-birdBlue w-1/2 h-screen flex items-center">
+    <div
+      className="sm:bg-birdBlue sm:flex sm:flex-col sm:items-center sm:justify-center
+                    lg:bg-birdBlue lg:w-1/2 lg:h-screen lg:flex lg:items-center lg:justify-center"
+    >
       <svg
-        className="m-auto"
+        className="sm:w-15 sm:h-20 sm:m-5
+                     lg:h-full"
         width="359"
         height="290"
         viewBox="0 0 359 290"
@@ -31,7 +35,7 @@ export function LogoPage() {
         />
       </svg>
     </div>
-  )
+  );
 }
 
 const Input = (props) => (
@@ -39,14 +43,14 @@ const Input = (props) => (
     {...props}
     className="bg-transparent rounded-md p-2  border  border-onix outline-none focus:border-platinum"
   />
-)
+);
 
 const validationSchema = yup.object({
   name: yup.string().required("Digite seu nome:"),
   username: yup.string().required("Digite seu nome de usário:"),
   email: yup.string().required("Digite seu e-mail:").email("E-mail inválido"),
   password: yup.string().required("Digite sua senha:"),
-})
+});
 
 export function SignupPage({ signInUser }) {
   const formik = useFormik({
@@ -66,12 +70,16 @@ export function SignupPage({ signInUser }) {
     },
     validateOnMount: true,
     validationSchema,
-  })
+  });
 
   return (
-    <div className="flex space-y-6 items-center m-auto flex-col">
+    <div
+      className="sm:flex sm:flex-col sm:items-center sm:justify-center
+                 lg:flex lg:space-y-6 lg:items-center lg:m-auto lg:flex-col"
+    >
       <form
-        className="m-2 flex flex-col space-y-5 items-center"
+        className="sm:flex sm:flex-col sm:items-center sm:mt-20 sm:space-y-5 
+                     lg:m-2 lg:flex lg:flex-col lg:space-y-5 lg:items-center"
         onSubmit={formik.handleSubmit}
       >
         <span className="text-platinum text-4xl font-bold">Crie sua conta</span>
@@ -157,7 +165,7 @@ export function SignupPage({ signInUser }) {
         </button>
       </form>
 
-      <span className="text-silver flex items-center">
+      <span className="text-silver flex items-center mt-2">
         {" "}
         Já tem uma conta?
         <a className="text-birdBlue text-sm p-1" href="/login">
@@ -165,16 +173,18 @@ export function SignupPage({ signInUser }) {
         </a>
       </span>
     </div>
-  )
+  );
 }
 
 export function Signup({ signInUser }) {
   return (
     <>
-      <div className="flex">
-        <LogoPage />
-        <SignupPage signInUser={signInUser} />
+      <div className="sm:flex sm:flex-col">
+        <div className="lg:flex">
+          <LogoPage />
+          <SignupPage signInUser={signInUser} />
+        </div>
       </div>
     </>
-  )
+  );
 }

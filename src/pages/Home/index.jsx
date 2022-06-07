@@ -19,21 +19,22 @@ function TweetForm({ loggedInUser, onSuccess }) {
         data: {
           text: values.text,
         },
-      });
+      })
 
       form.setFieldValue("text", "");
-      onSuccess();
+      onSuccess()
     },
     initialValues: {
       text: "",
     },
-  });
+  })
 
   function changeText(e) {
     setText(e.target.value);
   }
 
   return (
+    
     <div className="border-b border-silver p-4 space-y-4">
       <div className="flex  space-x-6">
         <svg
@@ -79,7 +80,7 @@ function TweetForm({ loggedInUser, onSuccess }) {
         </div>
       </form>
     </div>
-  );
+  )
 }
 
 function Tweet({ name, username, children }) {
@@ -107,7 +108,7 @@ function Tweet({ name, username, children }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export function Home({ loggedInUser }) {
@@ -118,13 +119,13 @@ export function Home({ loggedInUser }) {
       headers: {
         authorization: `Bearer ${loggedInUser.accessToken}`,
       },
-    });
+    })
     setData(res.data);
   }
 
   useEffect(() => {
-    getData();
-  }, []);
+    getData()
+  }, [])
 
   return (
     <>
@@ -142,5 +143,5 @@ export function Home({ loggedInUser }) {
           ))}
       </div>
     </>
-  );
+  )
 }
