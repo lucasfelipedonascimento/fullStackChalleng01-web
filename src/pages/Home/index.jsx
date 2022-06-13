@@ -62,7 +62,6 @@ function TweetForm({ loggedInUser, onSuccess }) {
           onBlur={formik.handleBlur}
           disabled={formik.isSubmitting}
         />
-
         <div className="flex justify-end items-center space-x-3">
           <span className="text-sm">
             <span> {formik.values.text.length} </span> /{" "}
