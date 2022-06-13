@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import axios from "axios";
 
 const MAX_TWEET_CHAR = 240;
+const MIN_TWEET_CHAR = 1;
 
 // Função formulário do tweet com uso do state(estado)
 function TweetForm({ loggedInUser, onSuccess }) {
@@ -19,22 +20,21 @@ function TweetForm({ loggedInUser, onSuccess }) {
         data: {
           text: values.text,
         },
-      })
+      });
 
       form.setFieldValue("text", "");
-      onSuccess()
+      onSuccess();
     },
     initialValues: {
       text: "",
     },
-  })
+  });
 
   function changeText(e) {
     setText(e.target.value);
   }
 
   return (
-    
     <div className="border-b border-silver p-4 space-y-4">
       <div className="flex  space-x-6">
         <svg
@@ -72,7 +72,9 @@ function TweetForm({ loggedInUser, onSuccess }) {
             type="submit"
             className="bg-birdBlue text-platinum px-5 py-2 rounded-full disabled:opacity-50"
             disabled={
-              formik.values.text.length > MAX_TWEET_CHAR || formik.isSubmitting
+              formik.values.text.length > MAX_TWEET_CHAR ||
+              formik.values.text.length < MIN_TWEET_CHAR ||
+              formik.isSubmitting
             }
           >
             Tweet
@@ -80,7 +82,7 @@ function TweetForm({ loggedInUser, onSuccess }) {
         </div>
       </form>
     </div>
-  )
+  );
 }
 
 function Tweet({ name, username, children }) {
@@ -108,7 +110,7 @@ function Tweet({ name, username, children }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export function Home({ loggedInUser }) {
@@ -119,13 +121,13 @@ export function Home({ loggedInUser }) {
       headers: {
         authorization: `Bearer ${loggedInUser.accessToken}`,
       },
-    })
+    });
     setData(res.data);
   }
 
   useEffect(() => {
-    getData()
-  }, [])
+    getData();
+  }, []);
 
   return (
     <>
@@ -143,5 +145,5 @@ export function Home({ loggedInUser }) {
           ))}
       </div>
     </>
-  )
+  );
 }
