@@ -7,6 +7,9 @@
     "build": "vite build",
     "preview": "vite preview"
   },
+  "engines": {
+    "node": "20"
+  },
   "dependencies": {
     "@heroicons/react": "^1.0.6",
     "axios": "^0.27.2",
